@@ -1,0 +1,12 @@
+{
+    "name": "Frozeth",
+    "version": "0.0.1",
+    "main": "public/index.html",
+    "window" : {
+        "frame": false,
+        "toolbar": false,
+        "width":1024,
+        "height":768,
+        "position":"center"
+    }
+}

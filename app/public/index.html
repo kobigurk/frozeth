@@ -1,0 +1,154 @@
+<html>
+    <head>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <div id="wrapper" style="overflow:scroll">
+            <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 0" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">Frozeth</a>
+                </div>
+            </nav>
+
+            <br />
+            <div class="col-sm-6">
+                <div id="pnl_client" class="panel panel-default">
+                    <div class="panel-heading">
+                        Client URL
+                    </div>
+                    <div class="panel-body">
+                        <form id="frm_client">
+                            <div class="form-group">
+                                <label for="client_url">URL</label>
+                                <input class="form-control" type="text" id="client_url" />
+                            </div>
+                            <button type="submit" class="btn btn-default" id="client_submit">Connect</button>
+                        </form>
+                        <div class="alert alert-success" id="client_alert_success" style="display:none;" role="alert">Client connected</div>
+                        <div class="alert alert-danger" id="client_alert_failure" style="display:none;" role="alert"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div id="pnl_connected" class="panel panel-default">
+                    <div class="panel-heading">
+                        Client Details
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label for="connected_version">Version</label>
+                            <div class="form-control" id="connected_version"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="connected_block">Block</label>
+                            <div class="form-control" id="connected_block"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="connected_gasprice">Gas Price</label>
+                            <div class="form-control" id="connected_gasprice"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Presale Wallet
+                    </div>
+                    <div class="panel-body">
+                        <form id="frm_presale">
+                            <div class="form-group">
+                                <label for="presale_password">Presale Password</label>
+                                <input class="form-control" type="password" id="presale_password" />
+                            </div>
+                            <div class="form-group">
+                                <label for="presale_file">Presale JSON</label>
+                                <input type="file" id="presale_file" />
+                            </div>
+                            <button type="submit" class="btn btn-default" id="presale_submit">Load Presale Wallet</button>
+                        </form>
+                    </div>
+                    <div class="alert alert-success" id="presale_alert_success" style="display:none;" role="alert"></div>
+                    <div class="alert alert-danger" id="presale_alert_failure" style="display:none;" role="alert"></div>
+                </div>
+            </div>
+            <div class="alert alert-success" id="client_alert_success" style="display:none;" role="alert">Client connected</div>
+            <div class="alert alert-danger" id="client_alert_failure" style="display:none;" role="alert"></div>
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Create Raw Transaction
+                    </div>
+                    <div class="panel-body">
+                        <form id="frm_tx">
+                            <div class="form-group">
+                                <label for="tx_privatekey">Private Key</label>
+                                <input type="password" class="form-control" id="tx_privatekey" placeholder="Can be prefilled by presale wallet..."/>
+                            </div>
+                            <div class="form-group">
+                                <label for="tx_value">Ether to transfer (in terms of Ether)</label>
+                                <input type="text" class="form-control" id="tx_value" />
+                            </div>
+                            <div class="form-group">
+                                <label for="tx_to">To</label>
+                                <input type="text" class="form-control" id="tx_to" />
+                            </div>
+                            <div class="form-group">
+                                <label for="tx_data">Data (needed for Kraken transfers)</label>
+                                <input type="text" class="form-control" id="tx_data" />
+                            </div>
+                            <div class="form-group">
+                                <label for="tx_gasprice">Gas Price</label>
+                                <input type="text" class="form-control" id="tx_gasprice" />
+                            </div>
+                            <div class="form-group">
+                                <label for="tx_gas">Gas</label>
+                                <input type="text" class="form-control" id="tx_gas" />
+                            </div>
+                            <div class="form-group">
+                                <label for="tx_nonce">Nonce</label>
+                                <input type="text" class="form-control" id="tx_nonce" />
+                            </div>
+                            <button type="submit" id="tx_serialize" class="btn btn-default">Serialize</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="alert alert-success" id="tx_alert_success" style="display:none;" role="alert">Transaction serialized!</div>
+                <div class="alert alert-danger" id="tx_alert_failure" style="display:none;" role="alert"></div>
+            </div>
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Send Transaction
+                    </div>
+                    <div class="panel-body">
+                        <form id="frm_send">
+                            <div class="form-group">
+                                <label for="send_tx">Serialized Transaction</label>
+                                <br />
+                                <textarea style="width:300px; height: 100px;"readonly class=form-control" id="send_tx"></textarea>
+                            </div>
+                            <button type="submit" id="send_submit" class="btn btn-default">Send</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="alert alert-success" id="send_alert_success" style="display:none;" role="alert">Send successful!</div>
+                <div class="alert alert-danger" id="send_alert_failure" style="display:none;" role="alert"></div>
+            </div>
+        </div>
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="bower_components/crypto-js/crypto-js.js"></script>
+        <script src="js/bitcoinjs.min.js"></script>
+        <script src="js/ethereumjs-tx.js"></script>
+        <script src="bower_components/web3/dist/web3.min.js"></script>
+        <script src="js/jquery.matchHeight-min.js"></script>
+        <script src="js/main.js"></script>
+    </body>
+</html>
