@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/presale_to_exchange.iml" filepath="$PROJECT_DIR$/.idea/presale_to_exchange.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/frozeth.iml" filepath="$PROJECT_DIR$/.idea/frozeth.iml" />
     </modules>
   </component>
 </project>

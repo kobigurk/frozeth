@@ -142,7 +142,11 @@
                 <div class="alert alert-danger" id="send_alert_failure" style="display:none;" role="alert"></div>
             </div>
         </div>
-        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript">
+            if (require) {
+                window.$ = window.jQuery = require('./bower_components/jquery/dist/jquery.min.js');
+            }
+        </script>
         <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="bower_components/crypto-js/crypto-js.js"></script>
         <script src="js/bitcoinjs.min.js"></script>

@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
     var connectedInterval;
     $('#pnl_client,#pnl_connected').matchHeight();
