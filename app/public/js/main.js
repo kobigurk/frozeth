@@ -1,3 +1,11 @@
+function download(text, name, type) {
+    var a = document.createElement("a");
+    var file = new Blob([text], {type: type});
+    a.href = URL.createObjectURL(file);
+    a.download = name;
+    a.click();
+}
+
 
 $(document).ready(function () {
     var connectedInterval;
@@ -12,7 +20,7 @@ $(document).ready(function () {
                 $('#connected_block').html(web3.eth.blockNumber);
                 var gasPrice = web3.eth.gasPrice.toString();
                 $('#connected_gasprice').html(gasPrice);
-                $('#tx_gasprice').val(gasPrice);
+                //$('#tx_gasprice').val(gasPrice);
             }
         }
         connectedInterval = setInterval(updateConnected, 2000);
@@ -62,7 +70,9 @@ $(document).ready(function () {
             };
             reader.readAsText(files[0]);
         } catch (e) {
-
+            $('#presale_alert_success').hide();
+            $('#presale_alert_failure').show();
+            $('#presale_alert_failure').html('Failure loading wallet, error was: ' + e.message);
         }
         return false;
     });
@@ -83,9 +93,7 @@ $(document).ready(function () {
             var serializedTx = tx.serialize();
             var b64encoded = btoa(String.fromCharCode.apply(null, serializedTx));
             $('#send_tx').val(b64encoded);
-            $('#send_tx')[0].style.overflow='hidden';
-            $('#send_tx')[0].style.height='1px';
-            $('#send_tx')[0].style.height=$('#send_tx')[0].scrollHeight + 10 + 'px';
+            $('#tx_save').prop('disabled', false);
             $('#tx_alert_success').show();
             $('#tx_alert_failure').hide();
         } catch (e) {
@@ -101,6 +109,7 @@ $(document).ready(function () {
             var serializedTx = new Uint8Array(atob(b64encoded).split("").map(function(c) {
                 return c.charCodeAt(0);
             }));
+
             web3.eth.sendRawTransaction(serializedTx, function (err, address) {
                 if (!err) {
                     $('#send_alert_success').show();
@@ -118,5 +127,41 @@ $(document).ready(function () {
             $('#send_alert_failure').html('Failure sending transaction, error was: ' + e.message);
         }
         return false;
+    });
+    $('#tx_save').click(function () {
+        download($('#send_tx').val(), 'tx.frozeth', 'text/plain');
+    });
+    $('#send_file').change(function (e) {
+            var files = $('#send_file')[0].files;
+            if (!files) {
+                return;
+            }
+            var reader = new FileReader();
+            reader.onload = function (event) {
+                try {
+                    var txText = event.target.result;
+                    $('#send_tx').val(txText);
+                    fixSendTxSize();
+                    var b64encoded = $('#send_tx').val();
+                    var serializedTx = new Uint8Array(atob(b64encoded).split("").map(function(c) {
+                        return c.charCodeAt(0);
+                    }));
+                    var tx = new EthTx(new Buffer(serializedTx));
+                    var json = tx.toJSON();
+                    $('#tx_gas').val(json[2]);
+                    $('#tx_nonce').val(json[0]);
+                    $('#tx_gasprice').val(json[1]);
+                    $('#tx_to').val(json[3]);
+                    $('#tx_value').val(json[4]);
+                    $('#tx_data').val(json[5]);
+                } catch (e) {
+                    $('#send_alert_success').hide();
+                    $('#send_alert_failure').show();
+                    $('#send_alert_failure').html('Failure sending transaction, error was: ' + e.message);
+               }
+            };
+            reader.readAsText(files[0]);
+
+
     });
 });
