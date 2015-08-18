@@ -1,0 +1,11 @@
+{
+  "name": "frozeth-builder",
+  "version": "1.0.0",
+  "dependencies": {
+    "bigi": "^1.4.0",
+    "bitcoinjs-lib": "^1.5.7",
+    "bs58": "^2.0.1",
+    "buffer": "^3.4.2",
+    "ecurve": "^1.0.1"
+  }
+}
