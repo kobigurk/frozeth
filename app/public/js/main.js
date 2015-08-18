@@ -81,7 +81,7 @@ $(document).ready(function () {
             var eth_priv = $('#tx_privatekey').val();
             var privateKey = new Buffer(eth_priv.toString(), 'hex');
             var rawTx = {
-                nonce: $('#tx_nonce').val(),
+                nonce: $('#tx_nonce').val() || '00',
                 gasPrice: $('#tx_gasprice').val(),
                 gasLimit: $('#tx_gas').val(),
                 to: $('#tx_to').val(),
