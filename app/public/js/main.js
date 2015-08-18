@@ -79,7 +79,7 @@ $(document).ready(function () {
     $('#frm_tx').submit(function () {
         try {
             var eth_priv = $('#tx_privatekey').val();
-            var privateKey = new Buffer(eth_priv.toString());
+            var privateKey = new Buffer(eth_priv.toString(), 'hex');
             var rawTx = {
                 nonce: $('#tx_nonce').val(),
                 gasPrice: $('#tx_gasprice').val(),
@@ -106,7 +106,7 @@ $(document).ready(function () {
         try {
             var serializedTx = $('#send_tx').val();
 
-            web3.eth.sendRawTransaction(new EthTx(new Buffer(serializedTx)).serialize().toString('hex'), function (err, address) {
+            web3.eth.sendRawTransaction(new EthTx(new Buffer(serializedTx, 'hex')).serialize().toString('hex'), function (err, address) {
                 if (!err) {
                     $('#send_alert_success').show();
                     $('#send_alert_failure').hide();
@@ -139,7 +139,7 @@ $(document).ready(function () {
                     $('#send_tx').val(txText);
                     fixSendTxSize();
                     var serializedTx = $('#send_tx').val();
-                    var tx = new EthTx(new Buffer(serializedTx));
+                    var tx = new EthTx(new Buffer(serializedTx, 'hex'));
                     var json = tx.toJSON();
                     $('#tx_gas').val(json[2]);
                     $('#tx_nonce').val(json[0]);
