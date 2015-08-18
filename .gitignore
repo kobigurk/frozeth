@@ -1,2 +1,3 @@
+.idea
 app/node_modules/**
 builder/build/**
