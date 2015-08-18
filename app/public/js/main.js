@@ -91,8 +91,7 @@ $(document).ready(function () {
             var tx = new EthTx(rawTx);
             tx.sign(privateKey);
             var serializedTx = tx.serialize();
-            var b64encoded = btoa(String.fromCharCode.apply(null, serializedTx));
-            $('#send_tx').val(b64encoded);
+            $('#send_tx').val(serializedTx.toString('hex'));
             $('#tx_save').prop('disabled', false);
             $('#tx_alert_success').show();
             $('#tx_alert_failure').hide();
@@ -105,10 +104,7 @@ $(document).ready(function () {
     });
     $('#frm_send').submit(function () {
         try {
-            var b64encoded = $('#send_tx').val();
-            var serializedTx = new Uint8Array(atob(b64encoded).split("").map(function(c) {
-                return c.charCodeAt(0);
-            }));
+            var serializedTx = $('#send_tx').val();
 
             web3.eth.sendRawTransaction(new EthTx(new Buffer(serializedTx)).serialize().toString('hex'), function (err, address) {
                 if (!err) {
@@ -142,10 +138,7 @@ $(document).ready(function () {
                     var txText = event.target.result;
                     $('#send_tx').val(txText);
                     fixSendTxSize();
-                    var b64encoded = $('#send_tx').val();
-                    var serializedTx = new Uint8Array(atob(b64encoded).split("").map(function(c) {
-                        return c.charCodeAt(0);
-                    }));
+                    var serializedTx = $('#send_tx').val();
                     var tx = new EthTx(new Buffer(serializedTx));
                     var json = tx.toJSON();
                     $('#tx_gas').val(json[2]);

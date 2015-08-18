@@ -15,3 +15,9 @@ Frozeth uses electron, so the easiest way to run it is :
 - electron app
 
 Frozeth also uses js libraries from the ethereum developers and community such as *ethereumjs-tx* and *web3.js*.
+
+To build Frozeth: 
+- npm install -g electron-packager
+- enter the *builder* directory.
+- If you want to update the bitcoin libraries, run ./build_bitcoin_libs.js.
+- Inspect the other scripts to see how to use electron-packager.
