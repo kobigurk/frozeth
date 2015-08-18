@@ -110,7 +110,7 @@ $(document).ready(function () {
                 return c.charCodeAt(0);
             }));
 
-            web3.eth.sendRawTransaction(serializedTx, function (err, address) {
+            web3.eth.sendRawTransaction(new EthTx(new Buffer(serializedTx)).serialize().toString('hex'), function (err, address) {
                 if (!err) {
                     $('#send_alert_success').show();
                     $('#send_alert_failure').hide();
