@@ -8,4 +8,10 @@ I then understood an interesting use-case of it can be a cold wallet:
 - Create a transaction on the offline machine and save it to a file.
 - Load the signed transaction on the online machine, connect to the client and transmit it.
 
-This is *extremely* alpha and should not be used (yet) with ether it would hurt you to lose.
+This is **extremely** alpha and should not be used (yet) with ether it would hurt you to lose.
+
+Frozeth uses electron, so the easiest way to run it is :
+- npm install -g electron-prebuilt
+- electron app
+
+Frozeth also uses js libraries from the ethereum developers and community such as *ethereumjs-tx* and *web3.js*.
